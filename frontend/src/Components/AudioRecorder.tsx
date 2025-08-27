@@ -1,6 +1,11 @@
+import { useState } from "react";
+import ReactMarkdown from "react-markdown"
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition"
 
 const AudioRecorder = () => {
+
+  // Hooks for Gemini's reponse
+  const [feedback, setFeedback] = useState("");
 
   // Setting up speech recognition
   const {
@@ -17,8 +22,6 @@ const AudioRecorder = () => {
   // Send POST request for transcript
   const sendTranscript = async() => {
 
-    alert("response clicked!")
-
     const response = await fetch("http://127.0.0.1:5000/send-transcript", {
       method: "POST",
       headers: {
@@ -28,12 +31,9 @@ const AudioRecorder = () => {
     });
 
     const data = await response.json();
-    console.log("Response from backend:", data);
     alert("response received!")
-
+    setFeedback(JSON.stringify(data.response));
   };
-
-
 
     const listen = () => {
         SpeechRecognition.startListening({ continuous: true });
@@ -47,6 +47,7 @@ const AudioRecorder = () => {
       <button onClick={resetTranscript}>reset</button>
       <button onClick={sendTranscript}>I'm done!</button>
       <p>{transcript}</p>
+      <ReactMarkdown>{feedback? `${feedback}` : "Gemini hasn't given a response :("}</ReactMarkdown>
     </div>
   )
 }

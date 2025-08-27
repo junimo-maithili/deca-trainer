@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import AudioRecorder from "./Components/AudioRecorder"
+import UploadRubric from "./Components/UploadRubric"
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +32,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <AudioRecorder />
+      <UploadRubric />
     </>
   )
 }
