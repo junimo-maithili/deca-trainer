@@ -1,0 +1,10 @@
+from flask import Blueprint, request, jsonify
+from services.opencv_service import eye_recognition
+
+opencv_bp = Blueprint("video", __name__)
+
+@opencv_bp.route("/send-video", methods=["POST"])
+def receive_data():
+    data = request.json
+    video = data.get("video")
+    return jsonify({"response": data})
