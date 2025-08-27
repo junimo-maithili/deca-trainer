@@ -21,15 +21,12 @@ const UploadRubric = () => {
         formData.append('file', file);
 
         const response = await fetch("http://127.0.0.1:5000/send-file", {
-          method: "POST",
-          body: formData
-        })
+            method: "POST",
+            body: formData
+        });
 
         alert(response)
-    
-        const data = await response.json();
         alert("response received!")
-        alert(data);
     };
 
 

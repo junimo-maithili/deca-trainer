@@ -1,11 +1,29 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from PIL import Image
+import pytesseract
+from pdf2image import convert_from_bytes
 
-app = Flask(__name__)
-CORS(app)
+EXTRACTED_TEXT_PATH = "data/judge_prompt.txt"
 
-@app.route('/send-filet', methods=["POST"])
-def receive_file():
-    data = request.json
-    transcript = data.get("formData")
-    
+def extract_text(file=None):
+    if not file:
+        try:
+            with open(EXTRACTED_TEXT_PATH, "r") as f:
+                return f.read()
+        except FileNotFoundError:
+            return "No rubric text found."
+
+    if file.mimetype == "application/pdf":
+        # Read the entire file bytes once
+        pdf_bytes = file.read()
+        images = convert_from_bytes(pdf_bytes)
+        text = "\n".join(pytesseract.image_to_string(img) for img in images)
+
+    else:
+        file.seek(0)
+        image = Image.open(file)
+        text = pytesseract.image_to_string(image).strip()
+
+    with open(EXTRACTED_TEXT_PATH, "w") as f:
+        f.write(text)
+
+        return text
