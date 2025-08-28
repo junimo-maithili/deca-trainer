@@ -5,5 +5,5 @@ opencv_bp = Blueprint("video", __name__)
 @opencv_bp.route("/send-video", methods=["POST"])
 def receive_data():
     data = request.json
-    video = data.get("video")
-    return jsonify({"response": data})
+    video = data.get("imgSrc")
+    return jsonify({"response": "working!"})

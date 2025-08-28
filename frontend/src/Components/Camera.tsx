@@ -1,9 +1,7 @@
 import Webcam from 'react-webcam'
-import { useRef, useCallback, useState, useEffect } from "react"
+import { useRef, useCallback, useEffect } from "react"
 
 const Camera = () => {
-
-  const [imgSrc, setImgSrc] = useState<string | null>("");
 
   const camSetup = {
     width: 500,
@@ -14,18 +12,19 @@ const Camera = () => {
     const webcamRef = useRef<Webcam>(null);
 
   const capture = useCallback(() => {
-    if (webcamRef.current) {
-      setImgSrc(webcamRef.current.getScreenshot());
-    }
+    
     
     }, [webcamRef]);
 
     // POST request to send video
-    const sendVideo = async() => {
+    const sendVideo = async(img: string) => {
 
       const response = await fetch("http://127.0.0.1:5000/send-video", {
         method: "POST",
-        body: JSON.stringify({ imgSrc })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ frame: img })
       });
   
       const data = await response.json();
@@ -33,8 +32,16 @@ const Camera = () => {
       alert(data)
     };    
 
-    // Send frames every 200ms
+    // Get and send screenshots every 200ms
     useEffect(() => {
+      if (webcamRef.current) {
+        const screenshot = webcamRef.current.getScreenshot();
+
+        if (screenshot) {
+          sendVideo(screenshot); // pass the screenshot to send
+        }  
+      }
+
       const interval = setInterval(sendVideo, 200);
       return () => clearInterval(interval);
     }, []);
@@ -47,7 +54,6 @@ const Camera = () => {
         screenshotFormat="image/jpeg"
         videoConstraints={camSetup}
       />
-      <button onClick={capture}>Capture photo</button>
     </div>
   )
 }
