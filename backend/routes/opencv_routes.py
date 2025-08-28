@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from services.opencv_service import eye_recognition
 
 opencv_bp = Blueprint("video", __name__)
 
