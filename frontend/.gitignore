@@ -33,3 +33,6 @@ env/
 **/env/
 **/.env/
 backend/venv/
+**/venv/
+
+**/venv
