@@ -39,3 +39,4 @@ backend/venv/
 **/workvenv
 **/goodvenv
 venv*
+git ls-files | grep venv
