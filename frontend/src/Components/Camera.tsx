@@ -1,5 +1,5 @@
 import Webcam from 'react-webcam'
-import { useRef, useCallback, useEffect } from "react"
+import { useRef, useEffect } from "react"
 
 const Camera = () => {
 
@@ -10,11 +10,6 @@ const Camera = () => {
   }
 
     const webcamRef = useRef<Webcam>(null);
-
-  const capture = useCallback(() => {
-    
-    
-    }, [webcamRef]);
 
     // POST request to send video
     const sendVideo = async(img: string) => {
