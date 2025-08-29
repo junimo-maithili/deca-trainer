@@ -36,3 +36,5 @@ backend/venv/
 **/venv/
 
 **/venv
+**/workvenv
+**/goodvenv
