@@ -61,7 +61,7 @@ six
 sounddevice
 tqdm
 typing-inspection
-typing_extension
+typing_extensions
 uritemplate
 urllib3
 Werkzeug
