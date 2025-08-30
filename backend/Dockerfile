@@ -1,23 +1,21 @@
-# Use Python 3.11
-FROM python:3.11-slim
+FROM python:3.11
 
-# Install OpenCV dependencies
+# Install dependencies for OpenCV
 RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    pkg-config \
+    libgtk2.0-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set workdir
 WORKDIR /app
 
-# Copy your code
 COPY . .
 
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port
 EXPOSE 5000
 
-# Run Flask
 CMD ["python", "app.py"]
