@@ -1,9 +1,9 @@
-'''
-
-import cv2
-import mediapipe as mp
+# import cv2
+# import mediapipe as mp
 
 def eye_recognition():
+    return ""
+    '''
     eye_cascade = cv2.CascadeClassifier("../haaracascade_eye_tree_eyeglasses.xml")
     cap = cv2.VideoCapture('test.mp4')
 
