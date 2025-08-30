@@ -1,4 +1,6 @@
-# import cv2
+'''
+
+import cv2
 import mediapipe as mp
 
 def eye_recognition():
@@ -54,3 +56,5 @@ def get_landmarks(image):
         cv2.imshow('MediaPipe FaceMesh', image)
 
     return landmarks, results
+
+'''

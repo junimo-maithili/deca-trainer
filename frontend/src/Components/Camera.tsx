@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 const Camera = () => {
 
   dotenv.config();
-  const backendUrl = process.env.BACKEND_URL
+  //const backendUrl = process.env.BACKEND_URL
 
   const camSetup = {
     width: 500,

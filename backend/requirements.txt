@@ -32,7 +32,6 @@ Jinja2
 kiwisolver
 MarkupSafe
 matplotlib
-mediapipe
 ml_dtypes
 numpy
 opt_einsum

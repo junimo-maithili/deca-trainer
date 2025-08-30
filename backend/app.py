@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, origins=["https://presentation-trainer.vercel.app/"])
 
     app.register_blueprint(ocr_bp)
     app.register_blueprint(gemini_bp)
