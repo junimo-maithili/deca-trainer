@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import dotenv from 'dotenv'
 
 const UploadRubric = () => {
 
     const [file, setFile] = useState<File | null>(null);
+
+    dotenv.config();
+  const backendUrl = process.env.BACKEND_URL
 
     const fileChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0] || null;
@@ -20,7 +24,7 @@ const UploadRubric = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        await fetch("http://127.0.0.1:5000/send-file", {
+        await fetch(`${backendUrl}/send-file`, {
             method: "POST",
             body: formData
         });

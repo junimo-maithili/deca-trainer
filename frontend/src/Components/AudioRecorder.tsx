@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition"
+import dotenv from 'dotenv'
 
 type AudioRecorderProps = {
   onTranscriptChange: (value: string) => void;
@@ -7,6 +8,9 @@ type AudioRecorderProps = {
 };
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
+  
+  dotenv.config();
+  const backendUrl = process.env.BACKEND_URL
 
   // Hooks for Gemini's reponse
   const [feedback, setFeedback] = useState("");
@@ -35,7 +39,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   // Send POST request for transcript
   const sendTranscript = async() => {
 
-    const response = await fetch("http://127.0.0.1:5000/send-transcript", {
+    const response = await fetch(`${backendUrl}/send-transcript`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

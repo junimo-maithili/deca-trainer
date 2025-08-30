@@ -1,8 +1,12 @@
 import Webcam from 'react-webcam'
 import { useRef } from "react"
+import dotenv from 'dotenv'
 //import { useRef, useEffect } from "react"
 
 const Camera = () => {
+
+  dotenv.config();
+  const backendUrl = process.env.BACKEND_URL
 
   const camSetup = {
     width: 500,
@@ -17,7 +21,7 @@ const Camera = () => {
     // POST request to send video
     const sendVideo = async(img: string) => {
 
-      const response = await fetch("http://127.0.0.1:5000/send-video", {
+      const response = await fetch(`${backendUrl}/send-video`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
