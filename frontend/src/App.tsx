@@ -12,8 +12,8 @@ function App() {
 
   return (
     <>
-      <h1>Deca Trainer!</h1>
-      <p>Watch yourself as you deliver your presentation and get instant feedback.</p>
+      <h1>Presentation Trainer!</h1>
+      <p>Watch yourself as you deliver your DECA-style presentation and get instant feedback.</p>
       <div className="container"> 
         <Camera />
         
