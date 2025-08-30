@@ -3,6 +3,7 @@ from routes.ocr_routes import ocr_bp
 from routes.gemini_routes import gemini_bp
 from routes.opencv_routes import opencv_bp
 from flask_cors import CORS
+import os
 
 def create_app():
     app = Flask(__name__)
