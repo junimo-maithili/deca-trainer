@@ -36,7 +36,6 @@ backend/venv/
 **/venv/
 
 **/venv
-**/workvenv
-**/goodvenv
 venv*
 git ls-files | grep venv
+**/judge_prompt.txt

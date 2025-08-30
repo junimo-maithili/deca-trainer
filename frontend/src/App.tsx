@@ -1,30 +1,35 @@
-import { useState } from 'react'
 import './App.css'
+import { useState } from "react"
 import AudioRecorder from "./Components/AudioRecorder"
 import UploadRubric from "./Components/UploadRubric"
 import Camera from "./Components/Camera"
 
-
 function App() {
-  const [count, setCount] = useState(0)
+
+  // Hooks for transcript and feedback
+  const [transcript, setTranscript] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   return (
-    <>        
+    <>
       <h1>Deca Trainer!</h1>
-      <Camera />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <p>Watch yourself as you deliver your presentation and get instant feedback.</p>
+      <div className="container"> 
+        <Camera />
+        
+        <div className="options">
+          <UploadRubric />
+          <AudioRecorder onTranscriptChange={setTranscript} onFeedbackChange={setFeedback}/>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <AudioRecorder />
-      <UploadRubric />
+
+      <div className="transcriptFeedback">
+        <h3>Your transcript:</h3>
+        <p>{transcript}</p>
+        <h3>Your feedback:</h3>
+        <p>{feedback}</p>
+      </div>
+
     </>
   )
 }

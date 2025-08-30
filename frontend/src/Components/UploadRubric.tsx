@@ -20,21 +20,21 @@ const UploadRubric = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await fetch("http://127.0.0.1:5000/send-file", {
+        await fetch("http://127.0.0.1:5000/send-file", {
             method: "POST",
             body: formData
         });
 
-        alert(response)
-        alert("response received!")
+        alert("File successfully uploaded!")
     };
 
 
   return (
 
-    <div>
+    <div className="fileUploadDiv">
+        <p>Upload your scenario document as a PDF:</p>
         <form action="/rubric_reading.py" onSubmit={sendFile}>
-            <input type="file" name="rubricUpload" onChange={fileChange}/>
+            <input type="file" id="rubricUpload" onChange={fileChange}/>
             <input type="submit" value="Submit"/>
         </form>
     </div>

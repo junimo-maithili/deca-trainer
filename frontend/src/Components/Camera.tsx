@@ -52,6 +52,7 @@ const Camera = () => {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         videoConstraints={camSetup}
+        className="webcam"
       />
     </div>
   )

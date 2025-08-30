@@ -13,6 +13,7 @@ def evaluate_roleplay(transcript, judge_prompt):
         Provide a short explanation for each rating.
         Here is the paper with the scenario that the participant receives. It also includes your judge characterization: {judge_prompt}
         Transcript: {transcript}
+        If applicable, give some suggestions for things you would say instead.
         """
 
         response = model.generate_content(prompt)

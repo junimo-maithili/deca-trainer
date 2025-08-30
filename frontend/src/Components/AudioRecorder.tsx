@@ -1,8 +1,12 @@
-import { useState } from "react";
-import ReactMarkdown from "react-markdown"
+import { useState, useEffect } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition"
 
-const AudioRecorder = () => {
+type AudioRecorderProps = {
+  onTranscriptChange: (value: string) => void;
+  onFeedbackChange: (value: string) => void;
+};
+
+const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
 
   // Hooks for Gemini's reponse
   const [feedback, setFeedback] = useState("");
@@ -14,6 +18,15 @@ const AudioRecorder = () => {
       resetTranscript,
       browserSupportsSpeechRecognition
   } = useSpeechRecognition();
+
+  useEffect(() => {
+    onTranscriptChange(transcript);
+  }, [transcript]);
+
+  useEffect(() => {
+    onFeedbackChange(feedback);
+  }, [feedback]);
+  
 
   if (!browserSupportsSpeechRecognition) {
       return <span>Your browser doesn't support speech recognition :(</span>
@@ -40,14 +53,16 @@ const AudioRecorder = () => {
     }
 
   return (
-    <div>
-      <p>microphone: {listening? "listening" : "not listening"} </p>
+    <div className="audioDiv">
+      <p>Click "start" to get recording!</p>
+      <p>Microphone: {listening? "ON" : "OFF"} </p>
+      <div className="microphoneButtons">
       <button onClick={listen}>start</button>
-      <button onClick={SpeechRecognition.stopListening}>stop</button>
-      <button onClick={resetTranscript}>reset</button>
-      <button onClick={sendTranscript}>I'm done!</button>
-      <p>{transcript}</p>
-      <ReactMarkdown>{feedback? `${feedback}` : "Gemini hasn't given a response :("}</ReactMarkdown>
+        <button onClick={SpeechRecognition.stopListening}>stop</button>
+        <button onClick={resetTranscript}>reset</button>
+        <button onClick={sendTranscript}>done!</button>
+      </div>
+
     </div>
   )
 }
