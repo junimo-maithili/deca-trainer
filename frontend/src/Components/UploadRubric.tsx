@@ -10,7 +10,6 @@ const UploadRubric = () => {
         const selectedFile = event.target.files?.[0] || null;
         setFile(selectedFile);
     }
-
     const sendFile = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -22,12 +21,16 @@ const UploadRubric = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        await fetch(`${backendUrl}/send-file`, {
-            method: "POST",
-            body: formData
-        });
+        try {
+            await fetch(`${backendUrl}/send-file`, {
+                method: "POST",
+                body: formData
+            });
 
         alert("File successfully uploaded!")
+        } catch {
+            alert("There was an problem with uploading the file.")
+        }
     };
 
 
