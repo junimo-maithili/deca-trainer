@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from services.opencv_service import eye_recognition
 import sys
 import os
 
@@ -11,4 +12,5 @@ ocr_bp = Blueprint("ocr", __name__)
 def return_text_rubric():
     file = request.files["file"]
     text = extract_text(file)
+    eye_recognition()
     return jsonify(text)

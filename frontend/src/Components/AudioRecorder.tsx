@@ -32,7 +32,7 @@ const AudioRecorder = () => {
 
     const data = await response.json();
     alert("response received!")
-    setFeedback(JSON.stringify(data.response));
+    setFeedback(data.response);
   };
 
     const listen = () => {

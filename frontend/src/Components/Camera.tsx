@@ -1,5 +1,6 @@
 import Webcam from 'react-webcam'
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
+//import { useRef, useEffect } from "react"
 
 const Camera = () => {
 
@@ -9,7 +10,9 @@ const Camera = () => {
     facingMode: "user"
   }
 
-    const webcamRef = useRef<Webcam>(null);
+  const webcamRef = useRef<Webcam>(null);
+
+    /*
 
     // POST request to send video
     const sendVideo = async(img: string) => {
@@ -40,6 +43,7 @@ const Camera = () => {
       const interval = setInterval(sendVideo, 200);
       return () => clearInterval(interval);
     }, []);
+    */
 
   return (
     <div>

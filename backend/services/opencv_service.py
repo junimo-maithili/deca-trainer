@@ -5,6 +5,7 @@ def eye_recognition():
     eye_cascade = cv2.CascadeClassifier("../haaracascade_eye_tree_eyeglasses.xml")
     cap = cv2.VideoCapture('test.mp4')
 
+
     while cap.isOpened():
         _, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

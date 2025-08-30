@@ -11,12 +11,12 @@ def evaluate_roleplay(transcript, judge_prompt):
         - Communication and professionalism 
         - Use of data/facts
         Provide a short explanation for each rating.
-        Here is your judge characterization: {judge_prompt}
+        Here is the paper with the scenario that the participant receives. It also includes your judge characterization: {judge_prompt}
         Transcript: {transcript}
         """
 
         response = model.generate_content(prompt)
-        return response
+        return response.text
     
     except Exception as e:
         return f"Error: {str(e)}"
