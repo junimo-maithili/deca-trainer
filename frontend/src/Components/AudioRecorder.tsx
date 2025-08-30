@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition"
-import dotenv from 'dotenv'
 
 type AudioRecorderProps = {
   onTranscriptChange: (value: string) => void;
@@ -9,7 +8,6 @@ type AudioRecorderProps = {
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
   
-  dotenv.config();
   const backendUrl = process.env.BACKEND_URL
 
   // Hooks for Gemini's reponse

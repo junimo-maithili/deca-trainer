@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import dotenv from 'dotenv'
 
 const UploadRubric = () => {
 
     const [file, setFile] = useState<File | null>(null);
 
-    dotenv.config();
   const backendUrl = process.env.BACKEND_URL
 
     const fileChange = async(event: React.ChangeEvent<HTMLInputElement>) => {

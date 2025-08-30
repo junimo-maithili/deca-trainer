@@ -1,11 +1,9 @@
 import Webcam from 'react-webcam'
 import { useRef } from "react"
-import dotenv from 'dotenv'
 //import { useRef, useEffect } from "react"
 
 const Camera = () => {
 
-  dotenv.config();
   //const backendUrl = process.env.BACKEND_URL
 
   const camSetup = {
