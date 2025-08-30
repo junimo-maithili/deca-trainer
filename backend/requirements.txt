@@ -35,7 +35,6 @@ matplotlib
 mediapipe
 ml_dtypes
 numpy
-opencv-python-headless
 opt_einsum
 optional-django
 packaging
