@@ -8,8 +8,9 @@ from services.ocr_service import extract_text
 
 gemini_bp = Blueprint("gemini", __name__)
 
-@gemini_bp.route("/send-transcript", methods=["POST"])
+@gemini_bp.route("/send-transcript", methods=["POST", "GET"])
 def receive_data():
+    return "hi!!"
     data = request.json
     transcript = data.get("transcript")
     judge_prompt = extract_text()
