@@ -22,8 +22,6 @@ import logging
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from services.ocr_service import extract_text
-
 
 from flask import Flask
 from routes.ocr_routes import ocr_bp
@@ -44,8 +42,8 @@ logging.info("AAHFHHGHHESHOEIGHO")
 app = Flask(__name__)
 CORS(app, origins=["https://presentation-trainer.vercel.app/"])
 
-#app.register_blueprint(ocr_bp)
-#app.register_blueprint(gemini_bp)
+app.register_blueprint(ocr_bp)
+app.register_blueprint(gemini_bp)
 #app.register_blueprint(opencv_bp)
 
 
