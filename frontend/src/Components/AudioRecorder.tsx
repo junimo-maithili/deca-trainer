@@ -52,6 +52,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   };
 
     const listen = () => {
+      console.log("please workkkkkkk")
         SpeechRecognition.startListening({ continuous: true });
     }
 
