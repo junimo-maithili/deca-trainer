@@ -1,5 +1,9 @@
 from flask import Flask
+import logging
 import os
+import sys
+from routes.ocr_routes import ocr_bp
+
 
 app = Flask(__name__)
 
@@ -7,9 +11,20 @@ app = Flask(__name__)
 def home():
     return "Hello from Railway!"
 
+
+app.register_blueprint(ocr_bp)
+#app.register_blueprint(gemini_bp)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
 
 
 
