@@ -9,7 +9,6 @@ charset-normalizer
 click
 contourpy
 cycler
-dotenv
 Flask
 flask-cors
 flatbuffers
@@ -50,7 +49,6 @@ pydantic_core
 pyparsing
 pytesseract
 python-dateutil
-python-dotenv
 requests
 rsa
 scipy
