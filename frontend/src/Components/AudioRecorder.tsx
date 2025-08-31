@@ -9,6 +9,11 @@ type AudioRecorderProps = {
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
   
   const backendUrl = process.env.VITE_BACKEND_URL
+  console.log(backendUrl)
+
+  // testing another way to see if it works
+const backendUrl2 = import.meta.env.VITE_BACKEND_URL;
+console.log("Loaded backend URL:", backendUrl2);
 
   // Hooks for Gemini's reponse
   const [feedback, setFeedback] = useState("");

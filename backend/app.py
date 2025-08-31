@@ -10,8 +10,16 @@ from routes.gemini_routes import gemini_bp
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["https://presentation-trainer.vercel.app/"])
 
+CORS(app, origins=[
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://presentation-trainer.vercel.app/",
+    "https://*.vercel.app"
+])
+
+# Or for testing, allow all origins (NOT for production)
+# CORS(app, origins="*")
 app.register_blueprint(ocr_bp)
 app.register_blueprint(gemini_bp)
 #app.register_blueprint(opencv_bp)
