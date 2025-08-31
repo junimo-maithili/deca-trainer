@@ -1,15 +1,10 @@
 from flask import Flask
-import os
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return "Hello from Railway!"
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))  # Use 8080 as fallback
-    app.run(host="0.0.0.0", port=port)
 
 
 
