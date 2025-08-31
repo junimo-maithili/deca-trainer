@@ -6,6 +6,6 @@ COPY . .
 
 RUN pip install --no-cache-dir flask
 
-EXPOSE 8080
+EXPOSE 5000
 
 CMD ["python", "app.py"]
