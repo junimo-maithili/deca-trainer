@@ -6,8 +6,9 @@ from routes.gemini_routes import gemini_bp
 from routes.opencv_routes import opencv_bp
 from flask_cors import CORS
 import os
+import logging
 
-print("AAHFHHGHHESHOEIGHO")
+logging.info("AAHFHHGHHESHOEIGHO")
 
 app = Flask(__name__)
 CORS(app, origins=["https://presentation-trainer.vercel.app/"])
@@ -23,4 +24,4 @@ if __name__ == "__main__":
 
 @app.route("/")
 def test():
-    print("hello!")
+    logging.info("hello!")
