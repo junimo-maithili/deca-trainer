@@ -22,6 +22,7 @@ app.register_blueprint(opencv_bp)
 @app.route("/")
 def test():
     logging.info("hello!")
+    return "Backend is alive!"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
