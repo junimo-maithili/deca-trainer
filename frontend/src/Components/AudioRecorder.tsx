@@ -51,15 +51,16 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     setFeedback(data.response);
   };
 
+    const rec=false;
     const listen = () => {
-      console.log("please workkkkkkk")
+      rec = "true";
         SpeechRecognition.startListening({ continuous: true });
     }
 
   return (
     <div className="audioDiv">
       <p>Click "start" to get recording!</p>
-      <p>Microphone: {listening? "ON" : "OFF"} </p>
+      <p>Microphone: {listening? "ON" : "OFF"} {rec}</p>
       <div className="microphoneButtons">
       <button onClick={listen}>start</button>
         <button onClick={SpeechRecognition.stopListening}>stop</button>
