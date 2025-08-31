@@ -21,9 +21,9 @@ logging.info("AAHFHHGHHESHOEIGHO")
 app = Flask(__name__)
 CORS(app, origins=["https://presentation-trainer.vercel.app/"])
 
-app.register_blueprint(ocr_bp)
-app.register_blueprint(gemini_bp)
-app.register_blueprint(opencv_bp)
+#app.register_blueprint(ocr_bp)
+#app.register_blueprint(gemini_bp)
+#app.register_blueprint(opencv_bp)
 
 
 @app.route("/")
