@@ -13,11 +13,10 @@ export default function DebugSpeech() {
     const recognition = new SpeechRecognition();
     recognition.continuous = true;
 
-    recognition.onstart = () => console.log("Recognition started");
-    recognition.onend = () => console.log("Recognition ended");
-    recognition.onerror = (e: any) => console.error("Recognition error:", e);
-    recognition.onresult = (e: any) =>
-      alert(`Transcript: ${e.results[0][0].transcript}`);
+    recognition.onstart = () => alert("Recognition started");
+    recognition.onend = () => alert("Recognition ended");
+    recognition.onerror = (e: any) => alert("Recognition error:");
+    recognition.onresult = (e: any) =>alert(`Transcript: ${e.results[0][0].transcript}`);
 
     recognition.start();
   }, []);
