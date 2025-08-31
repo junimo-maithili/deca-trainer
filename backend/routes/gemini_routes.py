@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+"""from flask import Blueprint, request, jsonify
 from services.gemini_service import evaluate_roleplay
 import sys
 import os
@@ -14,4 +14,4 @@ def receive_data():
     transcript = data.get("transcript")
     judge_prompt = extract_text()
     response = evaluate_roleplay(transcript, judge_prompt)
-    return jsonify({"response": response})
+    return jsonify({"response": response})"""

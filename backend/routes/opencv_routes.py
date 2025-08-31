@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+"""from flask import Blueprint, request, jsonify
 
 opencv_bp = Blueprint("video", __name__)
 
@@ -7,3 +7,4 @@ def receive_data():
     data = request.json
     video = data.get("imgSrc")
     return jsonify({"response": "working!"})
+"""
