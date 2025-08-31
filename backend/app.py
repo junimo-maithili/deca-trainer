@@ -1,14 +1,7 @@
 from flask import Flask
 import os
-# from routes.ocr_routes import ocr_bp
-# from routes.gemini_routes import gemini_bp
-# from routes.opencv_routes import opencv_bp
 
 app = Flask(__name__)
-
-# app.register_blueprint(ocr_bp)
-#app.register_blueprint(gemini_bp)
- #app.register_blueprint(opencv_bp)
 
 
 @app.route("/")
@@ -16,7 +9,7 @@ def home():
     return "Hello from Railway!"
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
+    port = int(os.environ.get("PORT", 5000))
     print(f"Starting server on port {port}")
     app.run(host="0.0.0.0", port=port, debug=False)
 
