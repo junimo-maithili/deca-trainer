@@ -16,6 +16,8 @@ COPY . .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Expose port (optional for local dev)
+EXPOSE 5000
 
-# Run with Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:$PORT", "app:app"]
+# Run Flask directly
+CMD ["python", "app.py"]
