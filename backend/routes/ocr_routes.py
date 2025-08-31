@@ -8,7 +8,7 @@ from services.ocr_service import extract_text
 
 ocr_bp = Blueprint("ocr", __name__)
 
-@ocr_bp.route("/send-file", methods=["POST"])
+@ocr_bp.route("/send-file", methods=["POST", "GET"])
 def return_text_rubric():
     file = request.files["file"]
     text = extract_text(file)
