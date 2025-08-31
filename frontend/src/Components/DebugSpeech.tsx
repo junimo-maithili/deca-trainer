@@ -15,7 +15,7 @@ export default function DebugSpeech() {
 
     recognition.onstart = () => alert("Recognition started");
     recognition.onend = () => alert("Recognition ended");
-    recognition.onerror = (e: any) => alert("Recognition error:");
+    recognition.onerror = () => alert("Recognition error:");
     recognition.onresult = (e: any) =>alert(`Transcript: ${e.results[0][0].transcript}`);
 
     recognition.start();
