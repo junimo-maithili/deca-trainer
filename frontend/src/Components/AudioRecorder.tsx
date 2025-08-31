@@ -58,7 +58,6 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
 
     (SpeechRecognition as any).onstart = () => alert("Recognition started");
 (SpeechRecognition as any).onend = () => alert("Recognition stopped");
-(SpeechRecognition as any).onerror = (e: any) => alert("Recognition error:", e);
 
 
   return (
