@@ -7,6 +7,8 @@ from routes.opencv_routes import opencv_bp
 from flask_cors import CORS
 import os
 
+print("AAHFHHGHHESHOEIGHO")
+
 app = Flask(__name__)
 CORS(app, origins=["https://presentation-trainer.vercel.app/"])
 
@@ -19,3 +21,6 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port)
 
 
+@app.route("/")
+def test():
+    print("hello!")
