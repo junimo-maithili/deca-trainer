@@ -12,7 +12,7 @@ def home():
     return "Hello from Railway!"
 
 
-app.register_blueprint(ocr_bp)
+#app.register_blueprint(ocr_bp)
 #app.register_blueprint(gemini_bp)
 
 if __name__ == "__main__":
@@ -20,6 +20,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port)
 
 
+'''
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -28,7 +29,7 @@ logging.basicConfig(
 
 
 
-'''
+
 from flask import Flask
 from routes.ocr_routes import ocr_bp
 from routes.gemini_routes import gemini_bp
