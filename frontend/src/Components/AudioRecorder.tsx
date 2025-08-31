@@ -8,7 +8,7 @@ type AudioRecorderProps = {
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
   
-  const backendUrl = process.env.BACKEND_URL
+  const backendUrl = process.env.VITE_BACKEND_URL
 
   // Hooks for Gemini's reponse
   const [feedback, setFeedback] = useState("");
