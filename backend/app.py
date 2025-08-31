@@ -17,15 +17,20 @@ if __name__ == "__main__":
 
 
 '''
+import os
+import logging
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from services.ocr_service import extract_text
+
 
 from flask import Flask
 from routes.ocr_routes import ocr_bp
 from routes.gemini_routes import gemini_bp
-from routes.opencv_routes import opencv_bp
+# from routes.opencv_routes import opencv_bp
 from flask_cors import CORS
-import os
-import logging
-import sys
+
 
 logging.basicConfig(
     level=logging.INFO,
