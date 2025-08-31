@@ -7,7 +7,14 @@ from routes.opencv_routes import opencv_bp
 from flask_cors import CORS
 import os
 import logging
-logging.basicConfig(level=logging.INFO)
+import sys
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+
 
 logging.info("AAHFHHGHHESHOEIGHO")
 
@@ -22,6 +29,7 @@ app.register_blueprint(opencv_bp)
 @app.route("/")
 def test():
     logging.info("hello!")
+    print("WAHOOOOOO")
     return "Backend is alive!"
 
 if __name__ == "__main__":
