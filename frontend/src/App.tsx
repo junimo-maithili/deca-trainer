@@ -3,7 +3,6 @@ import { useState } from "react"
 import AudioRecorder from "./Components/AudioRecorder"
 import UploadRubric from "./Components/UploadRubric"
 import Camera from "./Components/Camera"
-import Debug from "./Components/DebugSpeech"
 
 function App() {
 
@@ -29,7 +28,6 @@ function App() {
         <p>{transcript}</p>
         <h3>Your feedback:</h3>
         <p>{feedback}</p>
-        <Debug />
       </div>
 
     </>
