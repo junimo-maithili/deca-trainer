@@ -52,10 +52,14 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   };
 
     const listen = () => {
-      setTimeout(() => {
+      
         SpeechRecognition.startListening({ continuous: true });
-      }, 100);
     }
+
+    (SpeechRecognition as any).onstart = () => console.log("Recognition started");
+(SpeechRecognition as any).onend = () => console.log("Recognition stopped");
+(SpeechRecognition as any).onerror = (e: any) => console.error("Recognition error:", e);
+
 
   return (
     <div className="audioDiv">
