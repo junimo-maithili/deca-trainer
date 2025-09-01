@@ -8,6 +8,7 @@ type AudioRecorderProps = {
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange, onUnfinishedChange }) => {
 
+  // React hooks for listening state, feedback and transcript
   const [listening, setListening] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [transcript, setTranscript] = useState("");
@@ -16,6 +17,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   const backendUrl = import.meta.env.VITE_BACKEND_URL
   const recognitionRef = useRef<any>(null);
 
+  // Update info when changed
   useEffect(() => {
     onFeedbackChange(feedback);
   }, [feedback]);
@@ -28,6 +30,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     if (onUnfinishedChange) onUnfinishedChange(unfinishedTranscript);
   }, [unfinishedTranscript]);
   
+
   // Send POST request for transcript
   const sendTranscript = async() => {
 
@@ -46,6 +49,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     setFeedback(data.response);
   };
 
+    // Listen to user
     const listen = () => {
             
         const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -82,7 +86,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
         
           setTranscript(prev => {
             const updated = prev + finalText;
-            onTranscriptChange(updated); // call parent with updated text
+            onTranscriptChange(updated);
             return updated;
           });
         
