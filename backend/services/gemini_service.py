@@ -4,7 +4,7 @@ def evaluate_roleplay(transcript, judge_prompt):
     
     try:
         model = genai.GenerativeModel("gemini-1.5-flash")
-        prompt=f"""You are a judge evaluating a DECA-style roleplay. The participant is presenting a business solution in a limited time.
+        prompt=f"""You are a judge evaluating a business roleplay. The participant is presenting a business solution in a limited time.
         Rate the participant in the following areas (1–5): 
         - Problem identification 
         - Creativity of solution 
