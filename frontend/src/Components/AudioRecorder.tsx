@@ -31,6 +31,8 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   // Send POST request for transcript
   const sendTranscript = async() => {
 
+    alert("sending transcript...")
+
     const response = await fetch(`${backendUrl}/send-transcript`, {
       method: "POST",
       headers: {
@@ -40,14 +42,12 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     });
 
     const data = await response.json();
-    alert("response received!")
+    alert("feedback ready!")
     setFeedback(data.response);
   };
 
     const listen = () => {
-      
-      alert("start");
-      
+            
         const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (!SR) {
           alert("Speech recognition not supported in your browser :(");
