@@ -9,7 +9,9 @@ type AudioRecorderProps = {
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
   
   const backendUrl = import.meta.env.VITE_BACKEND_URL
-  console.log(backendUrl)
+  alert("Native SpeechRecognition")
+  alert((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
 
   // Hooks for Gemini's reponse
   const [feedback, setFeedback] = useState("");
@@ -52,12 +54,8 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   };
 
     const listen = () => {
-      
         SpeechRecognition.startListening({ continuous: true });
     }
-
-    (SpeechRecognition as any).onstart = () => alert("Recognition started");
-(SpeechRecognition as any).onend = () => alert("Recognition stopped");
 
 useEffect(() => {
   if (listening) {
