@@ -59,6 +59,16 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     (SpeechRecognition as any).onstart = () => alert("Recognition started");
 (SpeechRecognition as any).onend = () => alert("Recognition stopped");
 
+useEffect(() => {
+  if (listening) {
+    alert("Listening started");
+    alert("Recognition started!");
+  } else {
+    alert("Listening stopped");
+    alert("Recognition stopped!");
+  }
+}, [listening]);
+
 
   return (
     <div className="audioDiv">
