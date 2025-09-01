@@ -3,13 +3,15 @@ import { useState, useEffect, useRef } from "react";
 type AudioRecorderProps = {
   onTranscriptChange: (value: string) => void;
   onFeedbackChange: (value: string) => void;
+  onUnfinishedChange?: (unfinishedTranscript: string) => void;
 };
 
-const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
+const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange, onUnfinishedChange }) => {
 
   const [listening, setListening] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [transcript, setTranscript] = useState("");
+  const [unfinishedTranscript, setUnfinishedTranscript] = useState("");
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL
   const recognitionRef = useRef<any>(null);
@@ -22,6 +24,10 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
     onTranscriptChange(transcript);
   }, [transcript]);
 
+  useEffect(() => {
+    if (onUnfinishedChange) onUnfinishedChange(unfinishedTranscript);
+  }, [unfinishedTranscript]);
+  
   // Send POST request for transcript
   const sendTranscript = async() => {
 
@@ -62,11 +68,29 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
         }
 
         rec.onresult = (event: any) => {
-          setTranscript(Array.from(event.results)
-          .map((r: any) => r[0].transcript)
-          .join(""));
-          onTranscriptChange(transcript);
+          let finalText = "";
+          let interimText = "";
+        
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const result = event.results[i];
+            if (result.isFinal) {
+              finalText += result[0].transcript;
+            } else {
+              interimText += result[0].transcript;
+            }
+          }
+        
+          setTranscript(prev => {
+            const updated = prev + finalText;
+            onTranscriptChange(updated); // call parent with updated text
+            return updated;
+          });
+        
+          setUnfinishedTranscript(interimText);
+          if (onUnfinishedChange) onUnfinishedChange(interimText);
         };
+        
+
         rec.start();
     }
 
