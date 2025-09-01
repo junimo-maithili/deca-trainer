@@ -85,7 +85,7 @@ useEffect(() => {
   onClick={() => {
     alert("click");
     alert(listening)
-    SpeechRecognition.startListening({ continuous: true });
+    SpeechRecognition.startListening({ continuous: false });
     alert(listening)
   }}
 >
