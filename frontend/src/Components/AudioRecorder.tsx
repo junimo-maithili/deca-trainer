@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition"
+import { useState, useEffect, useRef } from "react";
 
 type AudioRecorderProps = {
   onTranscriptChange: (value: string) => void;
@@ -7,35 +6,21 @@ type AudioRecorderProps = {
 };
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFeedbackChange }) => {
-  
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
-  alert("Native SpeechRecognition")
-  alert((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
 
-
-  // Hooks for Gemini's reponse
+  const [listening, setListening] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [transcript, setTranscript] = useState("");
 
-  // Setting up speech recognition
-  const {
-      transcript,
-      listening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
-
-  useEffect(() => {
-    onTranscriptChange(transcript);
-  }, [transcript]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     onFeedbackChange(feedback);
   }, [feedback]);
-  
 
-  if (!browserSupportsSpeechRecognition) {
-      return <span>Your browser doesn't support speech recognition :(</span>
-  }
+  useEffect(() => {
+    onTranscriptChange(transcript);
+  }, [transcript]);
 
   // Send POST request for transcript
   const sendTranscript = async() => {
@@ -54,11 +39,48 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   };
 
     const listen = () => {
-      alert("Attempting to start listening…");
-      SpeechRecognition.startListening({ continuous: false });
-      alert(`Listening state right after: ${listening}`);
-      //SpeechRecognition.startListening({ continuous: true });
+      
+      alert("start");
+      
+        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SR) {
+          alert("Speech recognition not supported in your browser :(");
+          return;
+        }
+      
+        const rec = new SR();
+        recognitionRef.current = rec;
+        rec.continuous = true;
+        rec.interimResults = true;
+      
+        rec.onstart = () => {
+          setListening(true);
+        };
+
+        rec.onend = () => {
+          setListening(false);
+        }
+
+        rec.onresult = (event: any) => {
+          setTranscript(Array.from(event.results)
+          .map((r: any) => r[0].transcript)
+          .join(""));
+          onTranscriptChange(transcript);
+        };
+        rec.start();
     }
+
+    const stop = () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+        recognitionRef.current = null;
+      }
+    };
+  
+    const reset = () => {
+      setTranscript("");
+      onTranscriptChange("");
+    };
 
 
 
@@ -68,19 +90,10 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
       <p>Microphone: {listening? "ON" : "OFF"}</p>
       <div className="microphoneButtons">
         <button onClick={listen}>start</button>
-        <button onClick={SpeechRecognition.stopListening}>stop</button>
-        <button onClick={resetTranscript}>reset</button>
+        <button onClick={stop}>stop</button>
+        <button onClick={reset}>reset</button>
         <button onClick={sendTranscript}>done!</button>
-        
-      </div>
-      <button onClick={() => {
-  const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-  const rec = new SR();
-  rec.onstart = () => alert("Started!");
-  rec.start();  // <-- immediate inside click
-}}>
-  Enable Mic
-</button>
+        </div>
 
     </div>
   )
