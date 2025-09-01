@@ -73,17 +73,14 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
         <button onClick={sendTranscript}>done!</button>
         
       </div>
-      <button
-  onClick={() => {
-    alert("click");
-    SpeechRecognition.startListening({ continuous: true, language: "en-US" });
-    alert(listening)
-
-  }}
->
-  Test mic
+      <button onClick={() => {
+  const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  const rec = new SR();
+  rec.onstart = () => alert("Started!");
+  rec.start();  // <-- immediate inside click
+}}>
+  Enable Mic
 </button>
-
 
     </div>
   )
