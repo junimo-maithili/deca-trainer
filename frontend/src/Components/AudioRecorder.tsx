@@ -54,18 +54,12 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onTranscriptChange, onFee
   };
 
     const listen = () => {
-        SpeechRecognition.startListening({ continuous: true });
+      console.log("Attempting to start listening…");
+      SpeechRecognition.startListening({ continuous: false });
+      console.log("Listening state right after:", listening);
+      //SpeechRecognition.startListening({ continuous: true });
     }
 
-useEffect(() => {
-  if (listening) {
-    alert("Listening started");
-    alert("Recognition started!");
-  } else {
-    alert("Listening stopped");
-    alert("Recognition stopped!");
-  }
-}, [listening]);
 
 
   return (
