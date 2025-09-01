@@ -84,7 +84,9 @@ useEffect(() => {
       <button
   onClick={() => {
     alert("click");
+    alert(listening)
     SpeechRecognition.startListening({ continuous: true });
+    alert(listening)
   }}
 >
   Test mic
